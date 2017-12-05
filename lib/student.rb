@@ -23,6 +23,18 @@ class Student
     all_students
   end
 
+  def self.first_X_students_in_grade_10(num)
+    sql = <<-SQL
+      SELECT * FROM students WHERE grade = 10 LIMIT ?
+    SQL
+    all_students = DB[:conn].execute(sql,num).collect do |row|
+      student = self.new
+      student.id, student.name, student.grade = row[0], row[1], row[2]
+      student
+    end
+    all_students
+  end
+
   def self.find_by_name(name)
     sql = <<-SQL
       SELECT * FROM students WHERE name = ?
