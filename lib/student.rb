@@ -35,6 +35,10 @@ class Student
     all_students
   end
 
+  def self.first_student_in_grade_10
+    self.first_X_students_in_grade_10(1)
+  end
+
   def self.find_by_name(name)
     sql = <<-SQL
       SELECT * FROM students WHERE name = ?
