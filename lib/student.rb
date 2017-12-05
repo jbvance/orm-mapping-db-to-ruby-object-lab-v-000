@@ -3,10 +3,6 @@ require 'pry'
 class Student
   attr_accessor :id, :name, :grade
 
-  # def initialize(name:, grade:, id: nil)
-  #   @name, @grade, @id =
-  # end
-
   def self.new_from_db(row)
     student = self.new
     student.id = row[0]
@@ -16,8 +12,16 @@ class Student
   end
 
   def self.all
-    # retrieve all the rows from the "Students" database
-    # remember each row should be a new instance of the Student class
+    sql = <<-SQL
+      SELECT * FROM students
+    SQL
+    all_students = DB[:conn].execute(sql).collect do |row|
+      student = self.new
+      student.id, student.name, student.grade = row[0], row[1], row[2]
+      student
+    end
+    all_students
+    binding.pry
   end
 
   def self.find_by_name(name)
