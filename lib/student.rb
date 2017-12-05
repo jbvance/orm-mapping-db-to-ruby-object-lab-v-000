@@ -21,7 +21,6 @@ class Student
       student
     end
     all_students
-    binding.pry
   end
 
   def self.find_by_name(name)
