@@ -16,9 +16,7 @@ class Student
       SELECT * FROM students
     SQL
     all_students = DB[:conn].execute(sql).collect do |row|
-      student = self.new
-      student.id, student.name, student.grade = row[0], row[1], row[2]
-      student
+      self.create_student_from_row(row)
     end
     all_students
   end
