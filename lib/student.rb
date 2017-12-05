@@ -1,3 +1,5 @@
+require 'pry'
+
 class Student
   attr_accessor :id, :name, :grade
 
@@ -22,7 +24,9 @@ class Student
     sql = <<-SQL
       SELECT * FROM students WHERE name = ?
     SQL
-    student = DB[:conn].execute(sql, name).flatten
+    result = DB[:conn].execute(sql, name).flatten
+    binding.pry
+    
   end
 
   def save
