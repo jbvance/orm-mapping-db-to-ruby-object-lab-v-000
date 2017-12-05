@@ -26,7 +26,7 @@ class Student
     SQL
     result = DB[:conn].execute(sql, name).flatten
     binding.pry
-    
+
   end
 
   def save
