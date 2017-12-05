@@ -25,8 +25,9 @@ class Student
       SELECT * FROM students WHERE name = ?
     SQL
     result = DB[:conn].execute(sql, name).flatten
-    binding.pry
-
+    student = self.new
+    student.id, student.name, student.grade = result[0], result[1], result[2]
+    student
   end
 
   def save
