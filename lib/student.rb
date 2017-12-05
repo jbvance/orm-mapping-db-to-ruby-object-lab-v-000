@@ -2,14 +2,14 @@ class Student
   attr_accessor :id, :name, :grade
 
   # def initialize(name:, grade:, id: nil)
-  #   @name, @grade, @id = 
+  #   @name, @grade, @id =
   # end
 
   def self.new_from_db(row)
     student = self.new
     student.id = row[0]
     student.name = row[1]
-    student.grade = row[2]    
+    student.grade = row[2]
   end
 
   def self.all
@@ -21,16 +21,16 @@ class Student
     # find the student in the database given a name
     # return a new instance of the Student class
   end
-  
+
   def save
     sql = <<-SQL
-      INSERT INTO students (name, grade) 
+      INSERT INTO students (name, grade)
       VALUES (?, ?)
     SQL
 
     DB[:conn].execute(sql, self.name, self.grade)
   end
-  
+
   def self.create_table
     sql = <<-SQL
     CREATE TABLE IF NOT EXISTS students (
